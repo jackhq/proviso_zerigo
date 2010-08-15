@@ -19,7 +19,7 @@ using a simple command line instruction.
     
     zerigo:
       user: user
-      password: password
+      token: token
       type: A
       ttl: 15000
         

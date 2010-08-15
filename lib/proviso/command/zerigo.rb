@@ -5,6 +5,8 @@ module Proviso::Command
     def initialize(args)
       @args = args
       load_config
+      ::Zerigo::DNS::Base.user = @user
+      ::Zerigo::DNS::Base.password = @token
     end
     
     def link
@@ -33,7 +35,7 @@ module Proviso::Command
       if File.exists?('proviso.yml')
         zerigo_config = YAML.load_file('proviso.yml')["zerigo"]
         @user = zerigo_config['user']
-        @password = zerigo_config['password']
+        @token = zerigo_config['token']
         @type = zerigo_config['type']
         @ttl = zerigo_config['ttl']
         display "Config File Loaded...", true
