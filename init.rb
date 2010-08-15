@@ -1,0 +1,1 @@
+require 'proviso/command/zerigo'
