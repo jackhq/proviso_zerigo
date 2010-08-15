@@ -10,11 +10,13 @@ module Proviso::Command
     end
     
     def link
-      update_dns    
+      update_dns
+      display "Successfully linked #{@args.first} to #{@args[1]}", true    
     end
     
     def unlink
       update_dns
+      display "Successfully unlinked #{@args.first}", true    
     end
   
   private
