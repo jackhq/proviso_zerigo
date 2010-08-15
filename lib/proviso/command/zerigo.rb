@@ -30,11 +30,16 @@ module Proviso::Command
     
     
     def load_config
-      zerigo_config = YAML.load_file('proviso.yml')["zerigo"]
-      @user = zerigo_config['user']
-      @password = zerigo_config['password']
-      @type = zerigo_config['type']
-      @ttl = zerigo_config['ttl']
+      if File.exists?('proviso.yml')
+        zerigo_config = YAML.load_file('proviso.yml')["zerigo"]
+        @user = zerigo_config['user']
+        @password = zerigo_config['password']
+        @type = zerigo_config['type']
+        @ttl = zerigo_config['ttl']
+        display "Config File Loaded...", true
+      else
+        error "proviso.yml config file not found."
+      end
     end
   end
 end
