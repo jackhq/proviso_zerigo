@@ -34,8 +34,8 @@ module Proviso::Command
     
     
     def load_config
-      if File.exists?('proviso.yml')
-        zerigo_config = YAML.load_file('proviso.yml')["zerigo"]
+      if File.exists?(yaml_file)
+        zerigo_config = YAML.load_file(yaml_file)["zerigo"]
         @user = zerigo_config['user']
         @token = zerigo_config['token']
         @type = zerigo_config['type']
