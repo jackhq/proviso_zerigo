@@ -29,7 +29,7 @@ module Proviso::Command
       # find or create domain
       zone = ::Zerigo::DNS::Zone.find_or_create(domain)
       # find or create host
-      host = ::Zerigo::DNS::Host.update_or_create(zone.id, url, @type, @ttl, ip)      
+      host = ::Zerigo::DNS::Host.update_or_create(zone.id, prefix, @type, @ttl, ip)      
     end
     
     
