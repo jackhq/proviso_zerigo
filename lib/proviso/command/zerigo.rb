@@ -9,6 +9,11 @@ module Proviso::Command
       ::Zerigo::DNS::Base.password = @token
     end
     
+    def list
+      
+    end
+    
+    
     def link
       update_dns
       display "Successfully linked #{@args.first} to #{@args[1]}", true    
