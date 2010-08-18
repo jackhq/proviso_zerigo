@@ -2,6 +2,8 @@ require 'zerigo_dns'
 
 module Proviso::Command
   class Zerigo < Base
+    
+    attr_accessor :user, :token, :ttl, :type
     def initialize(args)
       @args = args
       load_config
@@ -16,12 +18,14 @@ module Proviso::Command
     
     def link
       update_dns
-      display "Successfully linked #{@args.first} to #{@args[1]}", true    
+      display "Successfully linked #{@args.first} to #{@args[1]}", true  
+      true  
     end
     
     def unlink
       update_dns
       display "Successfully unlinked #{@args.first}", true    
+      true
     end
   
   private
@@ -41,15 +45,20 @@ module Proviso::Command
     def load_config
       if File.exists?(yaml_file)
         zerigo_config = YAML.load_file(yaml_file)["zerigo"]
-        @user = zerigo_config['user']
-        @token = zerigo_config['token']
-        @type = zerigo_config['type']
-        @ttl = zerigo_config['ttl']
+        @user = get_option_value('user', zerigo_config)
+        @token = get_option_value('token', zerigo_config)
+        @type = get_option_value('type', zerigo_config)
+        @ttl = get_option_value('ttl', zerigo_config)
         display "Config File Loaded...", true
       else
         error "proviso.yml config file not found."
       end
     end
+    
+    def get_option_value(option, config)
+      extract_option("--#{option}") or config[option]
+    end
+    
   end
 end
 
